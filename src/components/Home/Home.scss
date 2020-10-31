@@ -1,0 +1,75 @@
+@import '../../assets/styles/color.scss';
+
+.outer-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  height: 100%;
+  width: 100%;
+
+  .side-container {
+    width: 15rem;
+    background-color: $color-grey;
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+      margin: 100px 0;
+    }
+  }
+
+  .main-container {
+    width: calc(100% - 15rem);
+    // height: 250vh;
+    background-color: $color-primary;
+    padding: 1.8rem;
+
+    .header-container {
+      width: 100%;
+      height: 3rem;
+      background-color: $color-grey;
+    }
+
+    .featured-container {
+      width: 100%;
+      height: 20rem;
+      background-color: $color-grey;
+      margin: 2rem 0;
+      border-radius: 1rem;
+    }
+
+    .popular-container {
+      width: 100%;
+      height: 20rem;
+
+      .movies-wrapper {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        .movie-item-container {
+          .movie-poster {
+            width: 18rem;
+            height: 25rem;
+            background-color: $color-grey;
+            border-radius: 1rem;
+          }
+
+          .movie-title {
+            font-size: 1.8rem;
+            margin: 0.8rem 0;
+            width: 18rem;
+          }
+
+          .movie-genres {
+            font-size: 1.2rem;
+            width: 18rem;
+          }
+        }
+      }
+    }
+  }
+}
