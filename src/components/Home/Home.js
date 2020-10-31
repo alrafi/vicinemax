@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Home.scss';
+import {Link} from 'react-router-dom';
 import StickyBox from 'react-sticky-box';
 import tmdb from '../../api/tmdb';
 
@@ -42,16 +43,18 @@ const Home = () => {
           <div className="movies-wrapper">
             {movies.map((movie) => {
               return (
-                <div className="movie-item-container">
-                  <img
-                    className="movie-poster"
-                    src={`${baseUrl}${movie.poster_path}`}
-                    alt={movie.title}
-                    loading="lazy"
-                  />
-                  <p className="movie-title">{movie.title} (2020)</p>
-                  <p className="movie-genres">Mystery</p>
-                </div>
+                <Link to={`/movie/${movie.id}`} key={movie.id}>
+                  <div className="movie-item-container" >
+                    <img
+                      className="movie-poster"
+                      src={`${baseUrl}${movie.poster_path}`}
+                      alt={movie.title}
+                      loading="lazy"
+                    />
+                    <p className="movie-title">{movie.title} (2020)</p>
+                    <p className="movie-genres">Mystery</p>
+                  </div>
+                </Link>
               );
             })}
           </div>

@@ -10,7 +10,7 @@
   width: 100%;
 
   .side-container {
-    width: 15rem;
+    width: 25rem;
     background-color: $color-grey;
     display: flex;
     flex-direction: column;
@@ -21,10 +21,10 @@
   }
 
   .main-container {
-    width: calc(100% - 15rem);
-    // height: 250vh;
-    background-color: $color-primary;
-    padding: 1.8rem;
+    width: calc(100% - 25rem);
+    height: 300vh;
+    // background-color: $color-primary;
+    padding: 2rem;
 
     .header-container {
       width: 100%;
