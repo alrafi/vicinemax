@@ -10,6 +10,7 @@ import { Carousel } from 'react-responsive-carousel';
 const Home = () => {
   const [movies, setMovies] = useState([]);
   const [featuredMovies, setFeaturedMovies] = useState([])
+  const [genres, setGenres] = useState([])
 
   useEffect(() => {
     const getMovies = async () => {
@@ -19,11 +20,24 @@ const Home = () => {
         },
       });
       setMovies(res.data.results);
-      // console.log(res.data.results);
+      console.log(res.data.results);
       getRandom(res.data.results)
     };
     getMovies();
   }, []);
+
+  useEffect(() => {
+    const getGenres = async () => {
+      const res = await tmdb.get('/genre/movie/list', {
+        params: {
+          language: 'en-US'
+        }
+      })
+      console.log(res.data.genres)
+      setGenres(res.data.genres)
+    }
+    getGenres()
+  }, [])
 
   const baseUrl = 'http://image.tmdb.org/t/p/w185';
   const backdropUrl = 'http://image.tmdb.org/t/p/w780';
@@ -33,6 +47,21 @@ const Home = () => {
     let random = movies.sort(() => .5 - Math.random()).slice(0, 4)
     setFeaturedMovies(random);
   }
+
+  const getReleasedYear = (releasedDate) => {
+    return releasedDate.substr(0, 4);
+  }
+
+  const getMovieGenre = (genreIDs) => {
+    let arr = []
+    genreIDs.forEach(item => {
+      const genreItem = genres.filter(genre => genre.id === item)
+      arr.push(genreItem[0])
+    })
+    return arr;
+  }
+
+  if (!movies || !genres) return <p>Loading</p>
 
   return (
     <div className="outer-container">
@@ -51,14 +80,11 @@ const Home = () => {
           <div className="genre-menu-wrapper">
             <p>Genre</p>
             <ul>
-              <li>Action</li>
-              <li>Biography</li>
-              <li>Comedy</li>
-              <li>Fiction</li>
-              <li>Horror</li>
-              <li>Mystery</li>
-              <li>Romance</li>
-              <li>Thriller</li>
+              {genres.map(genre => {
+                return (
+                  <li key={genre.id}>{genre.name}</li>
+                )
+              })}
             </ul>
           </div>
         </div>
@@ -71,9 +97,11 @@ const Home = () => {
             {
               featuredMovies.map(movie => {
                 return (
-                  <div className="featured-wrapper">
+                  <div className="featured-wrapper" key={movie.id}>
                     <img src={`${backdropUrl}${movie.backdrop_path}`} alt={movie.id} loading="lazy" />
-                    <h1>{movie.title}</h1>
+                    <Link to={`/movie/${movie.id}`}>
+                      <h1>{movie.title}</h1>
+                    </Link>
                   </div>
                 )
               })
@@ -86,24 +114,31 @@ const Home = () => {
           <div className="movies-wrapper">
             {movies.map((movie) => {
               return (
-                <Link to={`/movie/${movie.id}`} key={movie.id}>
-                  <div className="movie-item-container" >
+                <div className="movie-item-container" key={movie.id}>
+                  <Link to={`/movie/${movie.id}`} >
                     <img
                       className="movie-poster"
                       src={`${baseUrl}${movie.poster_path}`}
                       alt={movie.title}
                       loading="lazy"
                     />
-                    <p className="movie-title">{movie.title} (2020)</p>
-                    <p className="movie-genres">Mystery</p>
-                  </div>
-                </Link>
+                    <p className="movie-title">{movie.title} ({getReleasedYear(movie.release_date)})</p>
+                  </Link>
+                  {
+                    getMovieGenre(movie.genre_ids).map(item => {
+                      return (
+                        <p className="movie-genres">{item.name}</p>
+                      )
+                    })
+                  }
+                </div>
+
               );
             })}
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
