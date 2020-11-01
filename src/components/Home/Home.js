@@ -14,27 +14,37 @@ const Home = () => {
 
   useEffect(() => {
     const getMovies = async () => {
-      const res = await tmdb.get('/movie/popular', {
-        params: {
-          language: 'en-US',
-        },
-      });
-      setMovies(res.data.results);
-      console.log(res.data.results);
-      getRandom(res.data.results)
+      try {
+        const res = await tmdb.get('/movie/popular', {
+          params: {
+            language: 'en-US',
+          },
+        });
+        setMovies(res.data.results);
+        // console.log(res.data.results);
+        getRandom(res.data.results)
+      } catch (err) {
+        console.log(err);
+        return;
+      }
+
     };
     getMovies();
   }, []);
 
   useEffect(() => {
     const getGenres = async () => {
-      const res = await tmdb.get('/genre/movie/list', {
-        params: {
-          language: 'en-US'
-        }
-      })
-      console.log(res.data.genres)
-      setGenres(res.data.genres)
+      try {
+        const res = await tmdb.get('/genre/movie/list', {
+          params: {
+            language: 'en-US'
+          }
+        })
+        // console.log(res.data.genres)
+        setGenres(res.data.genres)
+      } catch (err) {
+
+      }
     }
     getGenres()
   }, [])
@@ -53,15 +63,19 @@ const Home = () => {
   }
 
   const getMovieGenre = (genreIDs) => {
+    // console.log(genreIDs)
     let arr = []
+    if (genres.length <= 0) return arr;
+
     genreIDs.forEach(item => {
       const genreItem = genres.filter(genre => genre.id === item)
       arr.push(genreItem[0])
     })
+    // console.log(arr)
     return arr;
   }
 
-  if (!movies || !genres) return <p>Loading</p>
+  if (!movies || !genres) return <h1>Loading</h1>
 
   return (
     <div className="outer-container">
@@ -127,7 +141,7 @@ const Home = () => {
                   {
                     getMovieGenre(movie.genre_ids).map(item => {
                       return (
-                        <p className="movie-genres">{item.name}</p>
+                        <p className="movie-genres" key={item.id}>{item.name}</p>
                       )
                     })
                   }
