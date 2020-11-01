@@ -138,13 +138,16 @@ const Home = () => {
                     />
                     <p className="movie-title">{movie.title} ({getReleasedYear(movie.release_date)})</p>
                   </Link>
-                  {
-                    getMovieGenre(movie.genre_ids).map(item => {
-                      return (
-                        <p className="movie-genres" key={item.id}>{item.name}</p>
-                      )
-                    })
-                  }
+                  <div className="genre-wrapper">
+                    {
+                      getMovieGenre(movie.genre_ids).map(item => {
+                        return (<p className="movie-genres">
+                          {item.name}<span>, </span>
+                        </p>
+                        )
+                      })
+                    }
+                  </div>
                 </div>
 
               );
