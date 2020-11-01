@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './Home.scss';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import StickyBox from 'react-sticky-box';
 import tmdb from '../../api/tmdb';
+import icon from '../../assets/img/icon.svg'
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
@@ -26,11 +27,29 @@ const Home = () => {
     <div className="outer-container">
       <StickyBox>
         <div className="side-container">
-          <h1>sidemenu</h1>
-          <h1>sidemenu</h1>
-          <h1>sidemenu</h1>
-          <h1>sidemenu</h1>
-          <h1>sidemenu</h1>
+          <img src={icon} alt="Vicinemax" />
+          <div className="main-menu-wrapper">
+            <ul>
+              <li>Home</li>
+              <li>Watch Later</li>
+              <li>Favorite</li>
+              <li>Popular</li>
+              <li>New Release</li>
+            </ul>
+          </div>
+          <div className="genre-menu-wrapper">
+            <p>Genre</p>
+            <ul>
+              <li>Action</li>
+              <li>Biography</li>
+              <li>Comedy</li>
+              <li>Fiction</li>
+              <li>Horror</li>
+              <li>Mystery</li>
+              <li>Romance</li>
+              <li>Thriller</li>
+            </ul>
+          </div>
         </div>
       </StickyBox>
       <div className="main-container">
