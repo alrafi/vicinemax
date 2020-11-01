@@ -59,8 +59,7 @@
 
   .main-container {
     width: calc(100% - 25rem);
-    height: 300vh;
-    // background-color: $color-primary;
+    height: 350vh;
     padding: 2rem;
 
     .header-container {
@@ -71,15 +70,35 @@
 
     .featured-container {
       width: 100%;
-      height: 20rem;
-      background-color: $color-grey;
+      // height: 20rem;
+      // background-color: $color-grey;
       margin: 2rem 0;
       border-radius: 1rem;
+      margin-bottom: 5rem;
+
+      h2 {
+        margin: 2rem 0;
+      }
+
+      .featured-wrapper {
+        width: 100%;
+
+        img {
+          width: 100%;
+          // height: 40rem;
+          object-fit: cover;
+          border-radius: 2rem;
+        }
+      }
     }
 
     .popular-container {
       width: 100%;
       height: 20rem;
+
+      h2 {
+        margin: 2rem 0;
+      }
 
       .movies-wrapper {
         width: 100%;

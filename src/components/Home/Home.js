@@ -4,9 +4,12 @@ import { Link } from 'react-router-dom';
 import StickyBox from 'react-sticky-box';
 import tmdb from '../../api/tmdb';
 import icon from '../../assets/img/icon.svg'
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
+  const [featuredMovies, setFeaturedMovies] = useState([])
 
   useEffect(() => {
     const getMovies = async () => {
@@ -16,12 +19,20 @@ const Home = () => {
         },
       });
       setMovies(res.data.results);
-      console.log(res.data.results);
+      // console.log(res.data.results);
+      getRandom(res.data.results)
     };
     getMovies();
   }, []);
 
   const baseUrl = 'http://image.tmdb.org/t/p/w185';
+  const backdropUrl = 'http://image.tmdb.org/t/p/w780';
+
+  const getRandom = (allMovies) => {
+    const movies = [...allMovies]
+    let random = movies.sort(() => .5 - Math.random()).slice(0, 4)
+    setFeaturedMovies(random);
+  }
 
   return (
     <div className="outer-container">
@@ -56,6 +67,18 @@ const Home = () => {
         <div className="header-container"></div>
         <div className="featured-container">
           <h2>For You</h2>
+          <Carousel>
+            {
+              featuredMovies.map(movie => {
+                return (
+                  <div className="featured-wrapper">
+                    <img src={`${backdropUrl}${movie.backdrop_path}`} alt={movie.id} />
+                  </div>
+                )
+              })
+            }
+          </Carousel>
+
         </div>
         <div className="popular-container">
           <h2>Popular</h2>
