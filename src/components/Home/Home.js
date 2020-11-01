@@ -72,7 +72,8 @@ const Home = () => {
               featuredMovies.map(movie => {
                 return (
                   <div className="featured-wrapper">
-                    <img src={`${backdropUrl}${movie.backdrop_path}`} alt={movie.id} />
+                    <img src={`${backdropUrl}${movie.backdrop_path}`} alt={movie.id} loading="lazy" />
+                    <h1>{movie.title}</h1>
                   </div>
                 )
               })
