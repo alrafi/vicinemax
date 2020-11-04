@@ -139,10 +139,14 @@
                   height: 600px;
                   box-sizing: border-box;
 
-                  .title {
-                    font-size: 3.2rem;
-                    color: #ffffff;
-                    text-align: left;
+                  .link-title {
+                    width: fit-content;
+
+                    .title {
+                      font-size: 3.2rem;
+                      color: #ffffff;
+                      text-align: left;
+                    }
                   }
 
                   .info {

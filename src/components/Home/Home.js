@@ -114,21 +114,21 @@ const Home = () => {
         <div className="header-container"></div>
         <div className="featured-container">
           <h2>For You</h2>
-          <Carousel>
+          <Carousel showThumbs={false}>
             {
               featuredMovies.map(movie => {
                 return (
-                  <>
+                  <React.Fragment key={movie.id}>
                     <span/>
-                    <div className="featured-wrapper" key={movie.id} style={background(movie.backdrop_path)}></div>
+                    <div className="featured-wrapper" style={background(movie.backdrop_path)}></div>
                     <div className="desc">
-                      <Link to={`/movie/${movie.id}`}>
+                      <Link to={`/movie/${movie.id}`} className="link-title">
                           <h1 className="title">{movie.title}</h1>
                       </Link>
                       <div className="info">
                           {/* <Rating rate={this.props.movie.rate}/> */}
+                          <h5>{`${movie.vote_average} rating`}</h5>
                           <h5>{`${movie.vote_count} reviews`}</h5>
-                          {/* <h5>{movie.overview}</h5> */}
                           {/* <h5 className="duration">{movie.duration}</h5> */}
                           <h5 className="year">{getReleasedYear(movie.release_date)}</h5>
                       </div>
@@ -137,7 +137,7 @@ const Home = () => {
                       </p>
                       {/* {this.renderTrailerButton(this.props.onTrailerPress)} */}
                     </div>
-                  </>
+                  </React.Fragment>
                 )
               })
             }
