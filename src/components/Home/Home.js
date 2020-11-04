@@ -50,11 +50,12 @@ const Home = () => {
   }, [])
 
   const baseUrl = 'http://image.tmdb.org/t/p/w185';
-  const backdropUrl = 'http://image.tmdb.org/t/p/w780';
+  const backdropUrl = 'http://image.tmdb.org/t/p/original';
 
   const getRandom = (allMovies) => {
     const movies = [...allMovies]
     let random = movies.sort(() => .5 - Math.random()).slice(0, 4)
+    console.log(random)
     setFeaturedMovies(random);
   }
 
@@ -73,6 +74,12 @@ const Home = () => {
     })
     // console.log(arr)
     return arr;
+  }
+
+  const background = (backdrop) => {
+    return {
+      backgroundImage: `linear-gradient(to right, #000, transparent 50%, transparent), url(${backdropUrl}${backdrop})`
+    }
   }
 
   if (!movies || !genres) return <h1>Loading</h1>
@@ -111,12 +118,26 @@ const Home = () => {
             {
               featuredMovies.map(movie => {
                 return (
-                  <div className="featured-wrapper" key={movie.id}>
-                    <img src={`${backdropUrl}${movie.backdrop_path}`} alt={movie.id} loading="lazy" />
-                    <Link to={`/movie/${movie.id}`}>
-                      <h1>{movie.title}</h1>
-                    </Link>
-                  </div>
+                  <>
+                    <span/>
+                    <div className="featured-wrapper" key={movie.id} style={background(movie.backdrop_path)}></div>
+                    <div className="desc">
+                      <Link to={`/movie/${movie.id}`}>
+                          <h1 className="title">{movie.title}</h1>
+                      </Link>
+                      <div className="info">
+                          {/* <Rating rate={this.props.movie.rate}/> */}
+                          <h5>{`${movie.vote_count} reviews`}</h5>
+                          {/* <h5>{movie.overview}</h5> */}
+                          {/* <h5 className="duration">{movie.duration}</h5> */}
+                          <h5 className="year">{getReleasedYear(movie.release_date)}</h5>
+                      </div>
+                      <p>
+                          {movie.overview}
+                      </p>
+                      {/* {this.renderTrailerButton(this.props.onTrailerPress)} */}
+                    </div>
+                  </>
                 )
               })
             }
@@ -141,7 +162,7 @@ const Home = () => {
                   <div className="genre-wrapper">
                     {
                       getMovieGenre(movie.genre_ids).map(item => {
-                        return (<p className="movie-genres">
+                        return (<p className="movie-genres" key={`${movie.id}-${item.id}`}>
                           {item.name}<span>, </span>
                         </p>
                         )

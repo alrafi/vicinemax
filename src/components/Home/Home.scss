@@ -15,7 +15,7 @@
     display: flex;
     flex-direction: column;
     padding: 2.4rem 0 2.4rem 1.5rem;
-    
+
     .main-menu-wrapper {
       margin: 2rem 0 2rem 2.5rem;
 
@@ -25,7 +25,7 @@
         li {
           font-size: 1.6rem;
           margin: 1.8rem 0;
-          padding: .5rem 1.2rem;
+          padding: 0.5rem 1.2rem;
           border-radius: 1.2rem 0 0 1.2rem;
 
           &:nth-child(1) {
@@ -41,7 +41,7 @@
       p {
         font-size: 1.6rem;
         margin: 1.6rem 0;
-        padding: .5rem 1.2rem;
+        padding: 0.5rem 1.2rem;
       }
 
       ul {
@@ -50,7 +50,7 @@
         li {
           font-size: 1.4rem;
           margin: 1.4rem 0;
-          padding: .5rem 1.2rem;
+          padding: 0.5rem 1.2rem;
           border-radius: 1.2rem 0 0 1.2rem;
         }
       }
@@ -69,41 +69,15 @@
     }
 
     .featured-container {
-      width: 100%;
-      // height: 20rem;
-      // background-color: $color-grey;
       margin: 2rem 0;
-      border-radius: 1rem;
-      margin-bottom: 3rem;
 
       h2 {
-        margin: 2rem 0;
+        font-size: 2rem;
+        margin: 1.4rem 0;
       }
 
-      .featured-wrapper {
+      .carousel-root {
         width: 100%;
-        // border-radius: 2rem;
-        // background: linear-gradient(
-        //   rgba(0, 0, 0, 0.7), 
-        //   rgba(0, 0, 0, 0.7)
-        // );
-
-        h1 {
-          position: absolute;
-          bottom: 2rem;
-          left: 2rem;
-          color: #ffffff;
-          font-size: 4.8rem;
-          font-weight: 200;
-          text-align: left;
-        }
-
-        img {
-          width: 100%;
-          filter: brightness(70%);
-          object-fit: cover;
-          // border-radius: 2rem;
-        }
       }
 
       .carousel {
@@ -111,7 +85,7 @@
           position: relative;
           bottom: 0;
           margin: 2rem 0;
-          
+
           li {
             width: 1.2rem;
             height: 1.2rem;
@@ -129,6 +103,72 @@
 
         .carousel-status {
           display: none;
+        }
+
+        .slider-wrapper {
+          ul {
+            li {
+              &.slide {
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+                height: 600px;
+
+                span {
+                  width: 400px;
+                  background-color: #000000;
+                  height: 600px;
+                }
+
+                .featured-wrapper {
+                  // width: 100%;
+                  width: 100%;
+                  background-repeat: no-repeat;
+                  background-position: center center;
+                  background-size: cover;
+                  height: 600px;
+                }
+
+                .desc {
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  position: absolute;
+                  padding: 50px;
+                  max-width: 600px;
+                  height: 600px;
+                  box-sizing: border-box;
+
+                  .title {
+                    font-size: 3.2rem;
+                    color: #ffffff;
+                    text-align: left;
+                  }
+
+                  .info {
+                    margin: 20px 0;
+                    text-align: left;
+                    display: flex;
+
+                    h5 {
+                      color: #80868b;
+                      margin: 1rem 0;
+                      max-width: 400px;
+                      font-size: 1.6rem;
+                      margin-right: 20px;
+                    }
+                  }
+
+                  p {
+                    text-align: left;
+                    font-size: 1.6rem;
+                    color: #ffffff;
+                    line-height: 1.5;
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -166,7 +206,7 @@
             .movie-genres {
               display: inline;
               font-size: 1.2rem;
-              
+
               &:last-child {
                 span {
                   display: none;

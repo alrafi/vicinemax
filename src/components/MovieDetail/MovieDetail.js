@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import tmdb from '../../api/tmdb';
-import { css } from "@emotion/core";
+// import { css } from "@emotion/core";
 import BounceLoader from "react-spinners/BounceLoader";
 
 const MovieDetail = () => {
