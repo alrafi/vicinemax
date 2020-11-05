@@ -228,10 +228,13 @@
         justify-content: space-between;
 
         .movie-item-container {
+          margin-bottom: 2.4rem;
+
           .movie-poster {
             width: 18rem;
             height: 25rem;
             background-color: $color-grey;
+            // margin-bottom: 2rem;
             border-radius: 1rem;
             box-shadow: 4px 4px 30px rgba(0, 0, 0, 0.15);
           }
@@ -240,6 +243,7 @@
             font-size: 1.6rem;
             margin: 0.8rem 0;
             width: 18rem;
+            // font-weight: 600;
           }
 
           .genre-wrapper {
@@ -247,6 +251,7 @@
             .movie-genres {
               display: inline;
               font-size: 1.2rem;
+              color: rgba(0, 0, 0, 0.6);
 
               &:last-child {
                 span {
