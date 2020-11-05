@@ -89,6 +89,7 @@ const Home = () => {
       <StickyBox>
         <div className="side-container">
           <img src={icon} alt="Vicinemax" />
+          <h1 className="app-title">Vicinemax</h1>
           <div className="main-menu-wrapper">
             <ul>
               <li>Home</li>
