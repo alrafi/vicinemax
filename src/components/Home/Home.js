@@ -6,6 +6,7 @@ import tmdb from '../../api/tmdb';
 import icon from '../../assets/img/icon.svg'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
+import iconSearch from '../../assets/img/icon-search.svg'
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
@@ -112,7 +113,13 @@ const Home = () => {
         </div>
       </StickyBox>
       <div className="main-container">
-        <div className="header-container"></div>
+        <div className="header-container">
+          <form>
+            <img src={iconSearch} alt="" className="filter-svg"/>
+            <input type="text" placeholder="Search movie..."/>
+          </form>
+        </div>
+
         <div className="featured-container">
           <h2>For You</h2>
           <Carousel showThumbs={false}>
