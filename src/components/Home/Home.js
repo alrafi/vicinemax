@@ -12,6 +12,12 @@ const Home = () => {
   const [movies, setMovies] = useState([]);
   const [featuredMovies, setFeaturedMovies] = useState([])
   const [genres, setGenres] = useState([])
+  const [minHeight, setMinHeight] = useState(document.body.scrollHeight)
+
+  useEffect(() => {
+    const height = document.body.scrollHeight
+    setMinHeight(`${height}px`)
+  }, [document.body.scrollHeight])
 
   useEffect(() => {
     const getMovies = async () => {
@@ -22,7 +28,6 @@ const Home = () => {
           },
         });
         setMovies(res.data.results);
-        // console.log(res.data.results);
         getRandom(res.data.results)
       } catch (err) {
         console.log(err);
@@ -83,7 +88,7 @@ const Home = () => {
     }
   }
 
-  if (!movies || !genres) return <h1>Loading</h1>
+  if (!movies || !genres || minHeight === '0') return <h1>Loading</h1>
 
   return (
     <div className="outer-container">
@@ -112,14 +117,13 @@ const Home = () => {
           </div>
         </div>
       </StickyBox>
-      <div className="main-container">
+      <div className="main-container" style={{minHeight: minHeight}}>
         <div className="header-container">
           <form>
             <img src={iconSearch} alt="" className="filter-svg"/>
             <input type="text" placeholder="Search movie..."/>
           </form>
         </div>
-
         <div className="featured-container">
           <h2>For You</h2>
           <Carousel showThumbs={false}>

@@ -1,13 +1,12 @@
 @import '../../assets/styles/color.scss';
 
 .outer-container {
-  width: 100%;
-  height: 100vh;
   display: flex;
-  align-items: flex-start;
   position: relative;
   height: 100%;
   width: 100%;
+  display: flex;
+  align-items: flex-start;
 
   .side-container {
     width: 25rem;
@@ -69,8 +68,11 @@
 
   .main-container {
     width: calc(100% - 25rem);
-    height: 350vh;
+    height: 100%;
+    // min-height: 400vh;
     padding: 2.4rem 3rem;
+    display: flex;
+    flex-direction: column;
 
     .header-container {
       width: 100%;
@@ -232,8 +234,8 @@
           margin-bottom: 2.4rem;
 
           .movie-poster {
-            width: 18rem;
-            height: 25rem;
+            width: 22rem;
+            height: 30rem;
             background-color: $color-grey;
             // margin-bottom: 2rem;
             border-radius: 1rem;
