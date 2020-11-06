@@ -1,266 +1,157 @@
 @import '../../assets/styles/color.scss';
 
-.outer-container {
-  display: flex;
-  position: relative;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  align-items: flex-start;
+.featured-container {
+  margin: 2rem 0;
 
-  .side-container {
-    width: 25rem;
-    background-color: #ffffff;
-    box-shadow: 0px -33px 20px rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: column;
-    padding: 2.4rem 0 2.4rem 1.5rem;
-
-    .app-title {
-      text-transform: uppercase;
-      font-size: 2.2rem;
-      text-align: center;
-      margin: 2.5rem 0 0 1.5rem;
-      font-weight: 300;
-      letter-spacing: 0.7rem;
-    }
-
-    .main-menu-wrapper {
-      margin: 2rem 0 2rem 2.5rem;
-
-      ul {
-        list-style: none;
-
-        li {
-          font-size: 1.6rem;
-          margin: 1.8rem 0;
-          padding: 0.5rem 1.2rem;
-          border-radius: 1.2rem 0 0 1.2rem;
-
-          &:nth-child(1) {
-            background-color: $color-primary;
-          }
-        }
-      }
-    }
-
-    .genre-menu-wrapper {
-      margin: 2rem 0 0 2.5rem;
-
-      p {
-        font-size: 1.6rem;
-        margin: 1.6rem 0;
-        padding: 0.5rem 1.2rem;
-      }
-
-      ul {
-        list-style: none;
-
-        li {
-          font-size: 1.4rem;
-          margin: 1.4rem 0;
-          padding: 0.5rem 1.2rem;
-          border-radius: 1.2rem 0 0 1.2rem;
-        }
-      }
-    }
+  h2 {
+    font-size: 2rem;
+    margin: 1.4rem 0;
   }
 
-  .main-container {
-    width: calc(100% - 25rem);
-    height: 100%;
-    // min-height: 400vh;
-    padding: 2.4rem 3rem;
-    display: flex;
-    flex-direction: column;
+  .carousel-root {
+    width: 100%;
+  }
 
-    .header-container {
-      width: 100%;
-      height: 3rem;
-      display: flex;
-      justify-content: flex-end;
+  .carousel {
+    .control-dots {
+      position: relative;
+      bottom: 0;
+      margin: 2rem 0;
 
-      form {
-        width: 40rem;
-        background-color: $color-grey;
-        height: 4rem;
-        border-radius: 3rem;
-        display: flex;
-        padding: 1rem 1.5rem;
-
-        input {
-          background-color: transparent;
-          border: none;
-          outline: none;
-          width: 90%;
-        }
-
-        img {
-          width: 2rem;
-          margin-right: 0.8rem;
-
-          &.filter-svg {
-            filter: invert(60%) sepia(60%) saturate(15%) hue-rotate(85deg)
-              brightness(100%) contrast(90%);
-          }
-        }
+      li {
+        width: 1.2rem;
+        height: 1.2rem;
+        background-color: $color-primary;
       }
     }
 
-    .featured-container {
-      margin: 2rem 0;
+    .thumbs-wrapper {
+      display: none;
+    }
 
-      h2 {
-        font-size: 2rem;
-        margin: 1.4rem 0;
-      }
+    .control-arrow {
+      display: none;
+    }
 
-      .carousel-root {
-        width: 100%;
-      }
+    .carousel-status {
+      display: none;
+    }
 
-      .carousel {
-        .control-dots {
-          position: relative;
-          bottom: 0;
-          margin: 2rem 0;
+    .slider-wrapper {
+      ul.slider {
+        li {
+          &.slide {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            height: 600px;
 
-          li {
-            width: 1.2rem;
-            height: 1.2rem;
-            background-color: $color-primary;
-          }
-        }
+            span {
+              width: 400px;
+              background-color: #000000;
+              height: 600px;
+            }
 
-        .thumbs-wrapper {
-          display: none;
-        }
+            .featured-wrapper {
+              // width: 100%;
+              width: 100%;
+              background-repeat: no-repeat;
+              background-position: center center;
+              background-size: cover;
+              height: 600px;
+            }
 
-        .control-arrow {
-          display: none;
-        }
+            .desc {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              position: absolute;
+              padding: 50px;
+              max-width: 600px;
+              height: 600px;
+              box-sizing: border-box;
 
-        .carousel-status {
-          display: none;
-        }
+              .link-title {
+                width: fit-content;
 
-        .slider-wrapper {
-          ul {
-            li {
-              &.slide {
+                .title {
+                  font-size: 3.2rem;
+                  color: #ffffff;
+                  text-align: left;
+                }
+              }
+
+              .info {
+                margin: 20px 0;
+                text-align: left;
                 display: flex;
-                flex-direction: row;
-                width: 100%;
-                height: 600px;
 
-                span {
-                  width: 400px;
-                  background-color: #000000;
-                  height: 600px;
+                h5 {
+                  color: #80868b;
+                  margin: 1rem 0;
+                  max-width: 400px;
+                  font-size: 1.6rem;
+                  margin-right: 20px;
                 }
+              }
 
-                .featured-wrapper {
-                  // width: 100%;
-                  width: 100%;
-                  background-repeat: no-repeat;
-                  background-position: center center;
-                  background-size: cover;
-                  height: 600px;
-                }
-
-                .desc {
-                  display: flex;
-                  flex-direction: column;
-                  justify-content: center;
-                  position: absolute;
-                  padding: 50px;
-                  max-width: 600px;
-                  height: 600px;
-                  box-sizing: border-box;
-
-                  .link-title {
-                    width: fit-content;
-
-                    .title {
-                      font-size: 3.2rem;
-                      color: #ffffff;
-                      text-align: left;
-                    }
-                  }
-
-                  .info {
-                    margin: 20px 0;
-                    text-align: left;
-                    display: flex;
-
-                    h5 {
-                      color: #80868b;
-                      margin: 1rem 0;
-                      max-width: 400px;
-                      font-size: 1.6rem;
-                      margin-right: 20px;
-                    }
-                  }
-
-                  p {
-                    text-align: left;
-                    font-size: 1.6rem;
-                    color: #ffffff;
-                    line-height: 1.5;
-                  }
-                }
+              p {
+                text-align: left;
+                font-size: 1.6rem;
+                color: #ffffff;
+                line-height: 1.5;
               }
             }
           }
         }
       }
     }
+  }
+}
 
-    .popular-container {
-      width: 100%;
-      height: 20rem;
+.popular-container {
+  width: 100%;
+  height: 20rem;
 
-      h2 {
-        margin: 2rem 0;
+  h2 {
+    margin: 2rem 0;
+  }
+
+  .movies-wrapper {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .movie-item-container {
+      margin-bottom: 2.4rem;
+
+      .movie-poster {
+        width: 22rem;
+        height: 30rem;
+        background-color: $color-grey;
+        // margin-bottom: 2rem;
+        border-radius: 1rem;
+        box-shadow: 4px 4px 30px rgba(0, 0, 0, 0.15);
       }
 
-      .movies-wrapper {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
+      .movie-title {
+        font-size: 1.6rem;
+        margin: 0.8rem 0;
+        width: 18rem;
+        // font-weight: 600;
+      }
 
-        .movie-item-container {
-          margin-bottom: 2.4rem;
+      .genre-wrapper {
+        width: 18rem;
+        .movie-genres {
+          display: inline;
+          font-size: 1.2rem;
+          color: rgba(0, 0, 0, 0.6);
 
-          .movie-poster {
-            width: 22rem;
-            height: 30rem;
-            background-color: $color-grey;
-            // margin-bottom: 2rem;
-            border-radius: 1rem;
-            box-shadow: 4px 4px 30px rgba(0, 0, 0, 0.15);
-          }
-
-          .movie-title {
-            font-size: 1.6rem;
-            margin: 0.8rem 0;
-            width: 18rem;
-            // font-weight: 600;
-          }
-
-          .genre-wrapper {
-            width: 18rem;
-            .movie-genres {
-              display: inline;
-              font-size: 1.2rem;
-              color: rgba(0, 0, 0, 0.6);
-
-              &:last-child {
-                span {
-                  display: none;
-                }
-              }
+          &:last-child {
+            span {
+              display: none;
             }
           }
         }
