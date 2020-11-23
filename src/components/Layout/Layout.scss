@@ -1,0 +1,59 @@
+@import '../../assets/styles/color.scss';
+
+.outer-container {
+  display: flex;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+
+  .main-container {
+    width: calc(100% - 25rem);
+    height: 100%;
+    padding: 2.4rem 3rem;
+    display: flex;
+    flex-direction: column;
+
+    .header-container {
+      width: 100%;
+      height: 3rem;
+      display: flex;
+      justify-content: flex-end;
+
+      form {
+        width: 40rem;
+        background-color: $color-grey;
+        height: 4rem;
+        border-radius: 3rem;
+        display: flex;
+        padding: 1rem 1.5rem;
+
+        input {
+          background-color: transparent;
+          border: none;
+          outline: none;
+          width: 90%;
+        }
+
+        img {
+          width: 2rem;
+          margin-right: 0.8rem;
+
+          &.filter-svg {
+            filter: invert(60%) sepia(60%) saturate(15%) hue-rotate(85deg)
+              brightness(100%) contrast(90%);
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .outer-container {
+    .main-container {
+      width: 100%;
+    }
+  }
+}

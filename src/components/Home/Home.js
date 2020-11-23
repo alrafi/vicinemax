@@ -1,23 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import './Home.scss';
 import { Link } from 'react-router-dom';
-import StickyBox from 'react-sticky-box';
 import tmdb from '../../api/tmdb';
-import icon from '../../assets/img/icon.svg'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
-import iconSearch from '../../assets/img/icon-search.svg'
+
+import Layout from '../Layout/Layout'
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
   const [featuredMovies, setFeaturedMovies] = useState([])
   const [genres, setGenres] = useState([])
-  const [minHeight, setMinHeight] = useState(document.body.scrollHeight)
-
-  useEffect(() => {
-    const height = document.body.scrollHeight
-    setMinHeight(`${height}px`)
-  }, [document.body.scrollHeight])
 
   useEffect(() => {
     const getMovies = async () => {
@@ -88,75 +81,43 @@ const Home = () => {
     }
   }
 
-  if (!movies || !genres || minHeight === '0') return <h1>Loading</h1>
+  if (!movies || !genres) return <h1>Loading</h1>
 
   return (
-    <div className="outer-container">
-      <StickyBox>
-        <div className="side-container">
-          <img src={icon} alt="Vicinemax" />
-          <h1 className="app-title">Vicinemax</h1>
-          <div className="main-menu-wrapper">
-            <ul>
-              <li>Home</li>
-              <li>Watch Later</li>
-              <li>Favorite</li>
-              <li>Popular</li>
-              <li>New Release</li>
-            </ul>
-          </div>
-          <div className="genre-menu-wrapper">
-            <p>Genre</p>
-            <ul>
-              {genres.map(genre => {
-                return (
-                  <li key={genre.id}>{genre.name}</li>
-                )
-              })}
-            </ul>
-          </div>
-        </div>
-      </StickyBox>
-      <div className="main-container" style={{minHeight: minHeight}}>
-        <div className="header-container">
-          <form>
-            <img src={iconSearch} alt="" className="filter-svg"/>
-            <input type="text" placeholder="Search movie..."/>
-          </form>
-        </div>
-        <div className="featured-container">
-          <h2>For You</h2>
-          <Carousel showThumbs={false}>
-            {
-              featuredMovies.map(movie => {
-                return (
-                  <React.Fragment key={movie.id}>
-                    <span/>
-                    <div className="featured-wrapper" style={background(movie.backdrop_path)}></div>
-                    <div className="desc">
-                      <Link to={`/movie/${movie.id}`} className="link-title">
-                          <h1 className="title">{movie.title}</h1>
-                      </Link>
-                      <div className="info">
-                          {/* <Rating rate={this.props.movie.rate}/> */}
-                          <h5>{`${movie.vote_average} rating`}</h5>
-                          <h5>{`${movie.vote_count} reviews`}</h5>
-                          {/* <h5 className="duration">{movie.duration}</h5> */}
-                          <h5 className="year">{getReleasedYear(movie.release_date)}</h5>
-                      </div>
-                      <p>
-                          {movie.overview}
-                      </p>
-                      {/* {this.renderTrailerButton(this.props.onTrailerPress)} */}
+    <Layout genres={genres}>
+      <div className="featured-container">
+        <h2>For You</h2>
+        <Carousel showThumbs={false}>
+          {
+            featuredMovies.map(movie => {
+              return (
+                <React.Fragment key={movie.id}>
+                  <span/>
+                  <div className="featured-wrapper" style={background(movie.backdrop_path)}></div>
+                  <div className="desc">
+                    <Link to={`/movie/${movie.id}`} className="link-title">
+                        <h1 className="title">{movie.title}</h1>
+                    </Link>
+                    <div className="info">
+                        {/* <Rating rate={this.props.movie.rate}/> */}
+                        <h5>{`${movie.vote_average} rating`}</h5>
+                        <h5>{`${movie.vote_count} reviews`}</h5>
+                        {/* <h5 className="duration">{movie.duration}</h5> */}
+                        <h5 className="year">{getReleasedYear(movie.release_date)}</h5>
                     </div>
-                  </React.Fragment>
-                )
-              })
-            }
-          </Carousel>
+                    <p>
+                        {movie.overview}
+                    </p>
+                    {/* {this.renderTrailerButton(this.props.onTrailerPress)} */}
+                  </div>
+                </React.Fragment>
+              )
+            })
+          }
+        </Carousel>
 
-        </div>
-        <div className="popular-container">
+      </div>
+      <div className="popular-container">
           <h2>Popular</h2>
           <div className="movies-wrapper">
             {movies.map((movie) => {
@@ -182,13 +143,11 @@ const Home = () => {
                     }
                   </div>
                 </div>
-
               );
             })}
           </div>
         </div>
-      </div>
-    </div >
+    </Layout>
   );
 };
 

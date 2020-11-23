@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import './MovieDetail.scss'
 import tmdb from '../../api/tmdb';
+import {Link} from 'react-router-dom'
 // import { css } from "@emotion/core";
-import BounceLoader from "react-spinners/BounceLoader";
+// import BounceLoader from "react-spinners/BounceLoader";
+import Layout from '../Layout/Layout';
 
 const MovieDetail = () => {
   const [detail, setDetail] = useState(null)
@@ -9,26 +12,82 @@ const MovieDetail = () => {
   useEffect(() => {
     const path = window.location.pathname.split('/')
     const getDetail = async () => {
-      const res = await tmdb.get(`/movie/${path[2]}`)
+      const res = await tmdb.get(`/movie/${path[2]}`, {
+        params: {
+          append_to_response: 'external_ids,credits,videos,images'
+        }
+      })
       console.log(res)
       setDetail(res.data)
     }
     getDetail()
   }, [])
 
-  const baseUrl = 'http://image.tmdb.org/t/p/w185';
+  const baseUrl = 'http://image.tmdb.org/t/p/w780';
+  const backdropUrl = 'http://image.tmdb.org/t/p/original';
 
-  if (!detail) return (<BounceLoader
-    size={100}
-    color={"#08919a"}
-  />);
+  const background = (backdrop) => {
+    return {
+      backgroundImage: `linear-gradient(to right, #000, transparent 50%, transparent), url(${backdropUrl}${backdrop})`
+    }
+  }
+
+  const getReleasedYear = (releasedDate) => {
+    return releasedDate.substr(0, 4);
+  }
+
+  if (!detail) return <></>;
 
   return (
-    <div>
-      <img src={`${baseUrl}${detail.poster_path}`} alt="" />
-      <h1>{detail.title}</h1>
-      <p>{detail.overview}</p>
-    </div>
+    <Layout>
+      <div className="movie-container">
+        <span/>
+        <div className="featured-wrapper" style={background(detail.backdrop_path)}></div>
+        <div className="desc">
+          <Link to={`/movie/${detail.id}`} className="link-title">
+              <h1 className="title">{detail.title}</h1>
+          </Link>
+          <div className="info">
+              <h5>{`${detail.vote_average} rating`}</h5>
+              <h5>{`${detail.vote_count} reviews`}</h5>
+              <h5 className="year">{getReleasedYear(detail.release_date)}</h5>
+          </div>
+          <p>
+              {detail.overview}
+          </p>
+        </div>
+      </div>
+      <div className="movie-info-container">
+        <img src={`${baseUrl}${detail.poster_path}`} alt={detail.title} className="movie-backdrop"/>
+        <div className="info-wrapper">
+          <h1 className="movie-detail-title">{detail.title}</h1>
+          <h2 className="movie-detail-tagline">{detail.tagline}</h2>
+          <div className="movie-stats-wrapper">
+            <p>{detail.vote_average}</p><span>|</span>
+            <p>{detail.vote_count} Reviews</p><span>|</span>
+            <p>{detail.runtime} min</p><span>|</span>
+            <p>{getReleasedYear(detail.release_date)}</p>
+            <p></p>
+          </div>
+          <p className="movie-detail-overview">{detail.overview}</p>
+          {
+            detail.genres.map(genre => {
+              return (
+                <p className="movie-detail-genre">{genre.name}<span>, </span></p>
+              )
+            })
+          }
+          <p className="movie-gallery-title">Galleries</p>
+          
+          {detail.images.backdrops.map((image, id) => {
+            return(
+              <img src={`${backdropUrl}${image.file_path}`} alt={`photos-${id}`} className='movie-detail-photo' loading="lazy"/>
+            )
+          })}
+          
+        </div>
+      </div>
+    </Layout>
   );
 };
 
