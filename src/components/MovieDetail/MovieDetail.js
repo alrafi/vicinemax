@@ -3,7 +3,7 @@ import './MovieDetail.scss'
 import tmdb from '../../api/tmdb';
 import {Link} from 'react-router-dom'
 // import { css } from "@emotion/core";
-import BounceLoader from "react-spinners/BounceLoader";
+// import BounceLoader from "react-spinners/BounceLoader";
 import Layout from '../Layout/Layout';
 
 const MovieDetail = () => {
@@ -48,22 +48,43 @@ const MovieDetail = () => {
               <h1 className="title">{detail.title}</h1>
           </Link>
           <div className="info">
-              {/* <Rating rate={this.props.movie.rate}/> */}
               <h5>{`${detail.vote_average} rating`}</h5>
               <h5>{`${detail.vote_count} reviews`}</h5>
-              {/* <h5 className="duration">{movie.duration}</h5> */}
               <h5 className="year">{getReleasedYear(detail.release_date)}</h5>
           </div>
           <p>
               {detail.overview}
           </p>
-          {/* {this.renderTrailerButton(this.props.onTrailerPress)} */}
         </div>
       </div>
       <div className="movie-info-container">
-        <img src={`${baseUrl}${detail.poster_path}`} alt=""/>
+        <img src={`${baseUrl}${detail.poster_path}`} alt={detail.title} className="movie-backdrop"/>
         <div className="info-wrapper">
-
+          <h1 className="movie-detail-title">{detail.title}</h1>
+          <h2 className="movie-detail-tagline">{detail.tagline}</h2>
+          <div className="movie-stats-wrapper">
+            <p>{detail.vote_average}</p><span>|</span>
+            <p>{detail.vote_count} Reviews</p><span>|</span>
+            <p>{detail.runtime} min</p><span>|</span>
+            <p>{getReleasedYear(detail.release_date)}</p>
+            <p></p>
+          </div>
+          <p className="movie-detail-overview">{detail.overview}</p>
+          {
+            detail.genres.map(genre => {
+              return (
+                <p className="movie-detail-genre">{genre.name}<span>, </span></p>
+              )
+            })
+          }
+          <p className="movie-gallery-title">Galleries</p>
+          
+          {detail.images.backdrops.map((image, id) => {
+            return(
+              <img src={`${backdropUrl}${image.file_path}`} alt={`photos-${id}`} className='movie-detail-photo' loading="lazy"/>
+            )
+          })}
+          
         </div>
       </div>
     </Layout>
