@@ -4,6 +4,7 @@ import './SideMenu.scss'
 import StickyBox from 'react-sticky-box';
 import icon from '../../assets/img/icon.svg'
 import iconGenre from '../../assets/img/icon-genre.svg'
+import { Link } from 'react-router-dom';
 
 const SideMenu = () => {
   const [genres, setGenres] = useState([])
@@ -28,8 +29,10 @@ const SideMenu = () => {
   return (
     <StickyBox>
       <div className="side-container">
-        <img src={icon} alt="Vicinemax" />
-        <h1 className="app-title">Vicinemax</h1>
+        <Link to="/" className="title-icon">
+          <img src={icon} alt="Vicinemax" />
+          <h1 className="app-title">Vicinemax</h1>
+        </Link>
         <div className="main-menu-wrapper">
           <ul>
             <li>Home</li>
