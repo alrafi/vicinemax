@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './MovieDetail.scss'
 import tmdb from '../../api/tmdb';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 // import { css } from "@emotion/core";
 // import BounceLoader from "react-spinners/BounceLoader";
 import Layout from '../Layout/Layout';
+import bgAlt from '../../assets/img/bg_alt.png'
+import backdropAlt from '../../assets/img/backdrop_alt.jpg'
 
 const MovieDetail = () => {
   const [detail, setDetail] = useState(null)
@@ -17,7 +19,6 @@ const MovieDetail = () => {
           append_to_response: 'external_ids,credits,videos,images'
         }
       })
-      console.log(res)
       setDetail(res.data)
     }
     getDetail()
@@ -28,7 +29,7 @@ const MovieDetail = () => {
 
   const background = (backdrop) => {
     return {
-      backgroundImage: `linear-gradient(to right, #000, transparent 50%, transparent), url(${backdropUrl}${backdrop})`
+      backgroundImage: `linear-gradient(to right, #000, transparent 50%, transparent), url(${backdrop ? `${backdropUrl}${backdrop}` : `${backdropAlt}`})`
     }
   }
 
@@ -41,24 +42,24 @@ const MovieDetail = () => {
   return (
     <Layout>
       <div className="movie-container">
-        <span/>
+        <span />
         <div className="featured-wrapper" style={background(detail.backdrop_path)}></div>
         <div className="desc">
           <Link to={`/movie/${detail.id}`} className="link-title">
-              <h1 className="title">{detail.title}</h1>
+            <h1 className="title">{detail.title}</h1>
           </Link>
           <div className="info">
-              <h5>{`${detail.vote_average} rating`}</h5>
-              <h5>{`${detail.vote_count} reviews`}</h5>
-              <h5 className="year">{getReleasedYear(detail.release_date)}</h5>
+            <h5>{`${detail.vote_average} rating`}</h5>
+            <h5>{`${detail.vote_count} reviews`}</h5>
+            <h5 className="year">{getReleasedYear(detail.release_date)}</h5>
           </div>
           <p>
-              {detail.overview}
+            {detail.overview}
           </p>
         </div>
       </div>
       <div className="movie-info-container">
-        <img src={`${baseUrl}${detail.poster_path}`} alt={detail.title} className="movie-backdrop"/>
+        <img src={detail.poster_path ? `${baseUrl}${detail.poster_path}` : bgAlt} alt={detail.title} className="movie-detail-poster" />
         <div className="info-wrapper">
           <h1 className="movie-detail-title">{detail.title}</h1>
           <h2 className="movie-detail-tagline">{detail.tagline}</h2>
@@ -78,13 +79,12 @@ const MovieDetail = () => {
             })
           }
           <p className="movie-gallery-title">Galleries</p>
-          
+
           {detail.images.backdrops.map((image, id) => {
-            return(
-              <img src={`${backdropUrl}${image.file_path}`} alt={`photos-${id}`} className='movie-detail-photo' loading="lazy"/>
+            return (
+              <img src={`${backdropUrl}${image.file_path}`} alt={`photos-${id}`} className='movie-detail-photo' loading="lazy" />
             )
           })}
-          
         </div>
       </div>
     </Layout>
