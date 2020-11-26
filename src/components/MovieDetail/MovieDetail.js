@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom'
 // import { css } from "@emotion/core";
 // import BounceLoader from "react-spinners/BounceLoader";
 import Layout from '../Layout/Layout';
+import bgAlt from '../../assets/img/bg_alt.png'
+import backdropAlt from '../../assets/img/backdrop_alt.jpg'
 
 const MovieDetail = () => {
   const [detail, setDetail] = useState(null)
@@ -17,7 +19,6 @@ const MovieDetail = () => {
           append_to_response: 'external_ids,credits,videos,images'
         }
       })
-      console.log(res)
       setDetail(res.data)
     }
     getDetail()
@@ -28,7 +29,7 @@ const MovieDetail = () => {
 
   const background = (backdrop) => {
     return {
-      backgroundImage: `linear-gradient(to right, #000, transparent 50%, transparent), url(${backdropUrl}${backdrop})`
+      backgroundImage: `linear-gradient(to right, #000, transparent 50%, transparent), url(${backdrop ? `${backdropUrl}${backdrop}` : `${backdropAlt}`})`
     }
   }
 
@@ -58,7 +59,7 @@ const MovieDetail = () => {
         </div>
       </div>
       <div className="movie-info-container">
-        <img src={`${baseUrl}${detail.poster_path}`} alt={detail.title} className="movie-detail-poster" />
+        <img src={detail.poster_path ? `${baseUrl}${detail.poster_path}` : bgAlt} alt={detail.title} className="movie-detail-poster" />
         <div className="info-wrapper">
           <h1 className="movie-detail-title">{detail.title}</h1>
           <h2 className="movie-detail-tagline">{detail.tagline}</h2>
