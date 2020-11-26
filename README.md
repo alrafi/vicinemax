@@ -27,10 +27,19 @@ Add `.env` file to your root directory and add the following
 REACT_APP_TMDB_API_KEY=[YOUR_TMDB_APIKEY]
 ```
 
-Powered by [TMDB](https://www.themoviedb.org/).
+### Powered by 
+
+[TMDB](https://www.themoviedb.org/).
 
 <img src="docs/tmdb.svg" alt="drawing" width="200"/>
 
 ### Authors
 
 Hafis Alrafi
+
+#### Todos
+
+- Get movies by genre
+- Save movies to local storage
+- Add loading spinner
+
