@@ -2,7 +2,7 @@
 
 ![Vicinemax](docs/vicinemax.png)
 
-Keep update with popular and lastest movies.
+Keep update with popular and latest movies.
 
 ### Live
 
@@ -29,7 +29,7 @@ REACT_APP_TMDB_API_KEY=[YOUR_TMDB_APIKEY]
 
 Powered by [TMDB](https://www.themoviedb.org/).
 
-![TMDB](docs/tmdb.svg)
+<img src="docs/tmdb.svg" alt="drawing" width="200"/>
 
 ### Authors
 
