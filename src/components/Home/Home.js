@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import tmdb from '../../api/tmdb';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
-
 import Layout from '../Layout/Layout'
 
 const Home = () => {
