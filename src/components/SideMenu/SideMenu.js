@@ -36,7 +36,7 @@ const SideMenu = () => {
         <div className="main-menu-wrapper">
           <ul>
             <li>Home</li>
-            <li>Watch Later</li>
+            <Link to='/movie/watch-later'><li>Watch Later</li></Link>
             <li>Favorite</li>
             <li>Popular</li>
             <li>New Release</li>

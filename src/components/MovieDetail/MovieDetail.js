@@ -10,6 +10,7 @@ import backdropAlt from '../../assets/img/backdrop_alt.jpg'
 
 const MovieDetail = () => {
   const [detail, setDetail] = useState(null)
+  const [addedWatchLater, setAddedWatchLater] = useState(false)
 
   useEffect(() => {
     const path = window.location.pathname.split('/')
@@ -35,6 +36,38 @@ const MovieDetail = () => {
 
   const getReleasedYear = (releasedDate) => {
     return releasedDate.substr(0, 4);
+  }
+
+  useEffect(() => {
+    const getWatchLater = async () => {
+      const listWatchLater = await JSON.parse(localStorage.getItem("listWatchLater"))
+      if (listWatchLater) {
+        if (detail) {
+          const find = listWatchLater.findIndex(el => el.id === detail.id)
+          setAddedWatchLater(find !== -1 ? true : false)
+        }
+      }
+    }
+    getWatchLater()
+  }, [detail])
+
+
+  const addToWatchLater = () => {
+    const listWatchLater = JSON.parse(localStorage.getItem("listWatchLater"))
+    let listToBeAdded = []
+    if (addedWatchLater) {
+      const list = listWatchLater.filter(item => item.id !== detail.id)
+      listToBeAdded = [...list]
+      setAddedWatchLater(false)
+    } else {
+      if (!listWatchLater) {
+        listToBeAdded = [detail]
+      } else {
+        listToBeAdded = [...listWatchLater, detail]
+      }
+      setAddedWatchLater(true)
+    }
+    localStorage.setItem("listWatchLater", JSON.stringify(listToBeAdded));
   }
 
   if (!detail) return <></>;
@@ -68,9 +101,13 @@ const MovieDetail = () => {
             <p>{detail.vote_count} Reviews</p><span>|</span>
             <p>{detail.runtime} min</p><span>|</span>
             <p>{getReleasedYear(detail.release_date)}</p>
-            <p></p>
           </div>
           <p className="movie-detail-overview">{detail.overview}</p>
+          <button onClick={addToWatchLater} className={`watch-later ${addedWatchLater ? 'added-watch-later' : ''}`}>
+            {
+              addedWatchLater ? 'Added to Watch Later' : 'Watch Later'
+            }
+          </button>
           {
             detail.genres.map(genre => {
               return (
@@ -82,7 +119,7 @@ const MovieDetail = () => {
 
           {detail.images.backdrops.map((image, id) => {
             return (
-              <img src={`${backdropUrl}${image.file_path}`} alt={`photos-${id}`} className='movie-detail-photo' loading="lazy" />
+              <img src={`${backdropUrl}${image.file_path}`} alt={`photos-${id}`}  key={`photos-${id}`} className='movie-detail-photo' loading="lazy" />
             )
           })}
         </div>
