@@ -31,12 +31,14 @@
 
       li {
         font-size: 1.6rem;
-        margin: 1.8rem 0;
-        padding: 0.5rem 1.2rem;
+        margin: 1.4rem 0;
+        padding: 0.8rem 1.2rem;
         border-radius: 1.2rem 0 0 1.2rem;
 
         &:hover {
           background-color: $color-primary;
+          color: #ffffff;
+          cursor: pointer;
         }
       }
     }
