@@ -15,9 +15,19 @@
     display: flex;
     flex-direction: column;
 
+    .header-wrapper {
+      display: flex;
+      align-items: center;
+
+      .title-icon {
+        img {
+          width: 3.2rem;
+        }
+      }
+    }
+
     .header-container {
       width: 100%;
-      height: 3rem;
       display: flex;
       justify-content: flex-end;
 
@@ -41,8 +51,21 @@
           margin-right: 0.8rem;
 
           &.filter-svg {
-            filter: invert(60%) sepia(60%) saturate(15%) hue-rotate(85deg)
-              brightness(100%) contrast(90%);
+            filter: invert(60%) sepia(60%) saturate(15%) hue-rotate(85deg) brightness(100%) contrast(90%);
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .outer-container {
+    .main-container {
+      .header-wrapper {
+        .title-icon {
+          img {
+            display: none;
           }
         }
       }
@@ -54,6 +77,20 @@
   .outer-container {
     .main-container {
       width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .outer-container {
+    .main-container {
+      padding: 1.8rem 2rem;
+
+      .header-container {
+        form {
+          width: 20rem;
+        }
+      }
     }
   }
 }

@@ -90,14 +90,11 @@ const Home = () => {
                     <h1 className="title">{movie.title}</h1>
                   </Link>
                   <div className="info">
-                    {/* <Rating rate={this.props.movie.rate}/> */}
-                    <h5>{`${movie.vote_average} rating`}</h5>
-                    <h5>{`${movie.vote_count} reviews`}</h5>
-                    {/* <h5 className="duration">{movie.duration}</h5> */}
+                    <h5>{`${movie.vote_average} Rating`}</h5>
+                    <h5>{`${movie.vote_count} Reviews`}</h5>
                     <h5 className="year">{getReleasedYear(movie.release_date)}</h5>
                   </div>
                   <p>{movie.overview}</p>
-                  {/* {this.renderTrailerButton(this.props.onTrailerPress)} */}
                 </div>
               </React.Fragment>
             )
@@ -117,20 +114,22 @@ const Home = () => {
                     alt={movie.title}
                     loading="lazy"
                   />
-                  <p className="movie-title">
-                    {movie.title} ({getReleasedYear(movie.release_date)})
-                  </p>
+                  <div className="title-wrapper">
+                    <p className="movie-title">
+                      {movie.title} ({getReleasedYear(movie.release_date)})
+                    </p>
+                    <div className="genre-wrapper">
+                      {getMovieGenre(movie.genre_ids).map((item) => {
+                        return (
+                          <p className="movie-genres" key={`${movie.id}-${item.id}`}>
+                            {item.name}
+                            <span>, </span>
+                          </p>
+                        )
+                      })}
+                    </div>
+                  </div>
                 </Link>
-                <div className="genre-wrapper">
-                  {getMovieGenre(movie.genre_ids).map((item) => {
-                    return (
-                      <p className="movie-genres" key={`${movie.id}-${item.id}`}>
-                        {item.name}
-                        <span>, </span>
-                      </p>
-                    )
-                  })}
-                </div>
               </div>
             )
           })}

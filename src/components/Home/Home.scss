@@ -53,7 +53,6 @@
             }
 
             .featured-wrapper {
-              // width: 100%;
               width: 100%;
               background-repeat: no-repeat;
               background-position: center center;
@@ -119,39 +118,165 @@
 
   .movies-wrapper {
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 25rem));
+    place-content: space-between space-evenly;
+    align-items: start;
+    gap: 4rem 2rem;
 
     .movie-item-container {
-      margin-bottom: 2.4rem;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      background-color: transparent;
+      border-radius: 0.8rem;
+      position: relative;
+      transition: all 300ms cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
 
       .movie-poster {
-        width: 22rem;
-        height: 30rem;
-        background-color: $color-grey;
-        // margin-bottom: 2rem;
-        border-radius: 1rem;
-        box-shadow: 4px 4px 30px rgba(0, 0, 0, 0.15);
+        width: 100%;
+        height: 38rem;
+        object-fit: cover;
+        border-radius: 0.8rem;
+        box-shadow: 0rem 2rem 5rem var(--shadow-color);
+        transition: all 100ms cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
       }
 
-      .movie-title {
-        font-size: 1.6rem;
-        margin: 0.8rem 0;
-        width: 18rem;
-        // font-weight: 600;
+      .title-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 3rem;
+
+        .movie-title {
+          text-align: center;
+          font-size: 1.3rem;
+          font-weight: 400;
+          margin-bottom: 1rem;
+          line-height: 1.4;
+          transition: color 300ms cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
+        }
+
+        .genre-wrapper {
+          text-align: center;
+
+          .movie-genres {
+            display: inline;
+            font-size: 1.2rem;
+            color: rgba(0, 0, 0, 0.6);
+
+            &:last-child {
+              span {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .popular-container {
+    .movies-wrapper {
+      grid-template-columns: repeat(auto-fit, minmax(10rem, 16rem));
+      gap: 4rem 1rem;
+      .movie-item-container {
+        .movie-poster {
+          height: 26rem;
+        }
+      }
+    }
+  }
+
+  .featured-container {
+    margin: 2rem 0;
+
+    h2 {
+      font-size: 1.8rem;
+      margin: 0.6rem 0;
+    }
+
+    .carousel-root {
+      width: 100%;
+    }
+
+    .carousel {
+      .control-dots {
+        position: relative;
+        bottom: 0;
+        margin: 2rem 0;
+
+        li {
+          width: 0.8rem;
+          height: 0.8rem;
+          background-color: $color-primary;
+        }
       }
 
-      .genre-wrapper {
-        width: 18rem;
-        .movie-genres {
-          display: inline;
-          font-size: 1.2rem;
-          color: rgba(0, 0, 0, 0.6);
+      .slider-wrapper {
+        ul.slider {
+          li {
+            &.slide {
+              display: flex;
+              flex-direction: row;
+              width: 100%;
+              height: 300px;
 
-          &:last-child {
-            span {
-              display: none;
+              span {
+                width: 250px;
+                background-color: #000000;
+                height: 300px;
+              }
+
+              .featured-wrapper {
+                width: 100%;
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-size: cover;
+                height: 300px;
+              }
+
+              .desc {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                position: absolute;
+                padding: 20px;
+                max-width: 300px;
+                height: 300px;
+                box-sizing: border-box;
+
+                .link-title {
+                  width: fit-content;
+
+                  .title {
+                    font-size: 2rem;
+                    color: #ffffff;
+                    text-align: left;
+                  }
+                }
+
+                .info {
+                  margin: 10px 0;
+                  text-align: left;
+                  display: flex;
+
+                  h5 {
+                    color: #80868b;
+                    margin: 1rem 0;
+                    max-width: 400px;
+                    font-size: 1.2rem;
+                    margin-right: 12px;
+                  }
+                }
+
+                p {
+                  font-size: 1.2rem;
+                }
+              }
             }
           }
         }
