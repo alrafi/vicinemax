@@ -3,6 +3,8 @@ import Layout from '../Layout/Layout';
 import tmdb from '../../api/tmdb'
 import { Link } from 'react-router-dom'
 import bgAlt from '../../assets/img/bg_alt.png'
+import { Helmet } from "react-helmet";
+import './SearchResult.scss'
 
 const SearchResult = (props) => {
   const { match } = props
@@ -19,7 +21,6 @@ const SearchResult = (props) => {
         });
         setDataSearch(res.data.results);
       } catch (err) {
-        console.log(err);
         return;
       }
 
@@ -62,36 +63,53 @@ const SearchResult = (props) => {
 
   return (
     <Layout>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Vicinemax | Movie Library</title>
+        <meta name="description" content="Vicinemax is a movie library that provide detail info about movies" />
+      </Helmet>
       <p>Search Results</p>
       <h1>{match.params.query}</h1>
       <div className="popular-container">
-        <h2>Popular</h2>
         <div className="movies-wrapper">
-          {dataSearch.map((movie) => {
-            return (
-              <div className="movie-item-container" key={movie.id}>
-                <Link to={`/movie/${movie.id}`} >
-                  <img
-                    className="movie-poster"
-                    src={movie.poster_path ? `${baseUrl}${movie.poster_path}` : bgAlt}
-                    alt={movie.title}
-                    loading="lazy"
-                  />
-                  <p className="movie-title">{movie.title} {movie.release_date ? `(${(getReleasedYear(movie.release_date))})` : ""}</p>
-                </Link>
-                <div className="genre-wrapper">
-                  {
-                    getMovieGenre(movie.genre_ids).map(item => {
-                      return (<p className="movie-genres" key={`${movie.id}-${item.id}`}>
-                        {item.name}<span>, </span>
-                      </p>
-                      )
-                    })
-                  }
-                </div>
+          {
+            dataSearch.length > 0 ?
+              dataSearch.map((movie) => {
+                return (
+                  <div className="movie-item-container" key={movie.id}>
+                    <Link to={`/movie/${movie.id}`} >
+                      <img
+                        className="movie-poster"
+                        src={movie.poster_path ? `${baseUrl}${movie.poster_path}` : bgAlt}
+                        alt={movie.title}
+                        loading="lazy"
+                      />
+                      <div className="title-wrapper">
+                        <p className="movie-title">
+                          {movie.title} ({getReleasedYear(movie.release_date)})
+                    </p>
+                        <div className="genre-wrapper">
+                          {
+                            getMovieGenre(movie.genre_ids).map(item => {
+                              return (<p className="movie-genres" key={`${movie.id}-${item.id}`}>
+                                {item.name}<span>, </span>
+                              </p>
+                              )
+                            })
+                          }
+                        </div>
+                      </div>
+                    </Link>
+
+                  </div>
+                );
+              })
+              :
+              <div className="no-movies">
+                <h2>No movies found</h2>
+                <Link to="/">Back to Home</Link>
               </div>
-            );
-          })}
+          }
         </div>
       </div>
     </Layout>

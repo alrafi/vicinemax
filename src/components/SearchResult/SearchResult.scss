@@ -1,0 +1,13 @@
+.no-movies {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  a {
+    font-size: 1.4rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

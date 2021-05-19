@@ -39,7 +39,6 @@ Hafis Alrafi
 
 #### Todos
 
-- Get movies by genre
-- Save movies to local storage
 - Add loading spinner
+- Get movies by genre
 
