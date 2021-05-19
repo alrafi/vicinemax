@@ -5,6 +5,8 @@ import tmdb from '../../api/tmdb'
 import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
 import { Carousel } from 'react-responsive-carousel'
 import Layout from '../Layout/Layout'
+import { Helmet } from "react-helmet";
+import GridLoader from "react-spinners/GridLoader";
 
 const Home = () => {
   const [movies, setMovies] = useState([])
@@ -38,7 +40,7 @@ const Home = () => {
           },
         })
         setGenres(res.data.genres)
-      } catch (err) {}
+      } catch (err) { }
     }
     getGenres()
   }, [])
@@ -77,64 +79,80 @@ const Home = () => {
 
   return (
     <Layout genres={genres}>
-      <div className="featured-container">
-        <h2>For You</h2>
-        <Carousel showThumbs={false} autoPlay infiniteLoop>
-          {featuredMovies.map((movie) => {
-            return (
-              <React.Fragment key={movie.id}>
-                <span />
-                <div className="featured-wrapper" style={background(movie.backdrop_path)}></div>
-                <div className="desc">
-                  <Link to={`/movie/${movie.id}`} className="link-title">
-                    <h1 className="title">{movie.title}</h1>
-                  </Link>
-                  <div className="info">
-                    <h5>{`${movie.vote_average} Rating`}</h5>
-                    <h5>{`${movie.vote_count} Reviews`}</h5>
-                    <h5 className="year">{getReleasedYear(movie.release_date)}</h5>
-                  </div>
-                  <p>{movie.overview}</p>
-                </div>
-              </React.Fragment>
-            )
-          })}
-        </Carousel>
-      </div>
-      <div className="popular-container">
-        <h2>Popular</h2>
-        <div className="movies-wrapper">
-          {movies.map((movie) => {
-            return (
-              <div className="movie-item-container" key={movie.id}>
-                <Link to={`/movie/${movie.id}`}>
-                  <img
-                    className="movie-poster"
-                    src={`${baseUrl}${movie.poster_path}`}
-                    alt={movie.title}
-                    loading="lazy"
-                  />
-                  <div className="title-wrapper">
-                    <p className="movie-title">
-                      {movie.title} ({getReleasedYear(movie.release_date)})
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Vicinemax | Movie Library</title>
+        <meta name="description" content="Vicinemax is a movie library that provide detail info about movies" />
+      </Helmet>
+      {
+        movies.length > 0 ?
+          <>
+            <div className="featured-container">
+              <h2>For You</h2>
+              <Carousel showThumbs={false} autoPlay infiniteLoop>
+                {featuredMovies.map((movie) => {
+                  return (
+                    <React.Fragment key={movie.id}>
+                      <span />
+                      <div className="featured-wrapper" style={background(movie.backdrop_path)}></div>
+                      <div className="desc">
+                        <Link to={`/movie/${movie.id}`} className="link-title">
+                          <h1 className="title">{movie.title}</h1>
+                        </Link>
+                        <div className="info">
+                          <h5>{`${movie.vote_average} Rating`}</h5>
+                          <h5>{`${movie.vote_count} Reviews`}</h5>
+                          <h5 className="year">{getReleasedYear(movie.release_date)}</h5>
+                        </div>
+                        <p>{movie.overview}</p>
+                      </div>
+                    </React.Fragment>
+                  )
+                })}
+              </Carousel>
+            </div>
+            <div className="popular-container">
+              <h2>Popular</h2>
+              <div className="movies-wrapper">
+                {movies.map((movie) => {
+                  return (
+                    <div className="movie-item-container" key={movie.id}>
+                      <Link to={`/movie/${movie.id}`}>
+                        <img
+                          className="movie-poster"
+                          src={`${baseUrl}${movie.poster_path}`}
+                          alt={movie.title}
+                          loading="lazy"
+                        />
+                        <div className="title-wrapper">
+                          <p className="movie-title">
+                            {movie.title} ({getReleasedYear(movie.release_date)})
                     </p>
-                    <div className="genre-wrapper">
-                      {getMovieGenre(movie.genre_ids).map((item) => {
-                        return (
-                          <p className="movie-genres" key={`${movie.id}-${item.id}`}>
-                            {item.name}
-                            <span>, </span>
-                          </p>
-                        )
-                      })}
+                          <div className="genre-wrapper">
+                            {getMovieGenre(movie.genre_ids).map((item) => {
+                              return (
+                                <p className="movie-genres" key={`${movie.id}-${item.id}`}>
+                                  {item.name}
+                                  <span>, </span>
+                                </p>
+                              )
+                            })}
+                          </div>
+                        </div>
+                      </Link>
                     </div>
-                  </div>
-                </Link>
+                  )
+                })}
               </div>
-            )
-          })}
-        </div>
-      </div>
+            </div>
+          </>
+          :
+          <div className="home-wrapper">
+            <GridLoader color="#08919a" size={24} />
+          </div>
+      }
+
+
     </Layout>
   )
 }
