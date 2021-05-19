@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 import Layout from '../Layout/Layout'
 import tmdb from '../../api/tmdb';
+import { Helmet } from "react-helmet";
 
 const WatchLater = () => {
   const [watchLaterMovies, setWatchLaterMovies] = useState([]);
@@ -39,6 +40,11 @@ const WatchLater = () => {
 
   return (
     <Layout genres={genres}>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Watch Later | Vicinemax</title>
+        <meta name="description" content="Vicinemax is a movie library that provide detail info about movies" />
+      </Helmet>
       <div className="popular-container">
         <h2>Watch Later</h2>
         <div className="movies-wrapper">
