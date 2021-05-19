@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import Layout from '../Layout/Layout';
 import bgAlt from '../../assets/img/bg_alt.png'
 import backdropAlt from '../../assets/img/backdrop_alt.jpg'
+import { Helmet } from "react-helmet";
 
 const MovieDetail = () => {
   const [detail, setDetail] = useState(null)
@@ -74,6 +75,11 @@ const MovieDetail = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{detail.title} | Vicinemax</title>
+        <meta name="description" content={detail.overview} />
+      </Helmet>
       <div className="movie-container">
         <span />
         <div className="featured-wrapper" style={background(detail.backdrop_path)}></div>
@@ -115,14 +121,16 @@ const MovieDetail = () => {
               )
             })
           }
-          <p className="movie-gallery-title">Galleries</p>
-
-          {detail.images.backdrops.map((image, id) => {
-            return (
-              <img src={`${backdropUrl}${image.file_path}`} alt={`photos-${id}`}  key={`photos-${id}`} className='movie-detail-photo' loading="lazy" />
-            )
-          })}
         </div>
+      </div>
+      <div className="galleries">
+        <p className="movie-gallery-title">Galleries</p>
+
+        {detail.images.backdrops.map((image, id) => {
+          return (
+            <img src={`${backdropUrl}${image.file_path}`} alt={`photos-${id}`} key={`photos-${id}`} className='movie-detail-photo' loading="lazy" />
+          )
+        })}
       </div>
     </Layout>
   );
