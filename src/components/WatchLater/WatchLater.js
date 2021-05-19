@@ -52,7 +52,11 @@ const WatchLater = () => {
                     alt={movie.title}
                     loading="lazy"
                   />
-                  <p className="movie-title">{movie.title} ({getReleasedYear(movie.release_date)})</p>
+                  <div className="title-wrapper">
+                    <p className="movie-title">
+                      {movie.title} ({getReleasedYear(movie.release_date)})
+                    </p>
+                  </div>
                 </Link>
               </div>
             );
