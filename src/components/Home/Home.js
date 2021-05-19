@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './Home.scss'
 import { Link } from 'react-router-dom'
 import tmdb from '../../api/tmdb'
-import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
+import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { Carousel } from 'react-responsive-carousel'
 import Layout from '../Layout/Layout'
 import { Helmet } from "react-helmet";
@@ -74,8 +74,6 @@ const Home = () => {
       backgroundImage: `linear-gradient(to right, #000, transparent 50%, transparent), url(${backdropUrl}${backdrop})`,
     }
   }
-
-  if (!movies || !genres) return <h1>Loading</h1>
 
   return (
     <Layout genres={genres}>
@@ -151,8 +149,6 @@ const Home = () => {
             <GridLoader color="#08919a" size={24} />
           </div>
       }
-
-
     </Layout>
   )
 }
