@@ -5,7 +5,7 @@ import SearchBar from '../SearchBar/SearchBar'
 import { Link } from 'react-router-dom'
 import icon from '../../assets/img/icon.svg'
 
-const Layout = ({ children, genres }) => {
+const Layout = ({ children, genres, home }) => {
   const [minHeight, setMinHeight] = useState(document.body.scrollHeight)
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const Layout = ({ children, genres }) => {
   return (
     <div className="outer-container">
       <SideMenu genres={genres} />
-      <div className="main-container" style={{ minHeight: minHeight }}>
+      <div className="main-container" style={{ minHeight: home ? minHeight : 0 }}>
         <div className="header-wrapper">
           <Link to="/" className="title-icon">
             <img src={icon} alt="Vicinemax" />
