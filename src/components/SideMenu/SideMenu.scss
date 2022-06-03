@@ -1,4 +1,4 @@
-@import '../../assets/styles/color.scss';
+@import "../../assets/styles/color.scss";
 
 .side-container {
   width: 25rem;
@@ -40,6 +40,11 @@
           color: #ffffff;
           cursor: pointer;
         }
+
+        &.active {
+          background-color: $color-primary;
+          color: #ffffff;
+        }
       }
     }
   }
@@ -66,6 +71,17 @@
 
         img {
           margin-right: 0.8rem;
+        }
+
+        &:hover {
+          background-color: $color-primary;
+          color: #ffffff;
+          cursor: pointer;
+        }
+
+        &.active {
+          background-color: $color-primary;
+          color: #ffffff;
         }
       }
     }

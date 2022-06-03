@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./Home.scss";
+import "../../assets/styles/MovieList.scss";
 import { Link } from "react-router-dom";
 import tmdb from "../../api/tmdb";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -8,23 +8,27 @@ import Layout from "../Layout/Layout";
 import { Helmet } from "react-helmet";
 import GridLoader from "react-spinners/GridLoader";
 
-const Home = () => {
+const Upcoming = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [movies, setMovies] = useState([]);
   const [featuredMovies, setFeaturedMovies] = useState([]);
   const [genres, setGenres] = useState([]);
 
   useEffect(() => {
     const getMovies = async () => {
+      setIsLoading(true);
       try {
-        const res = await tmdb.get("/movie/popular", {
+        const res = await tmdb.get("/movie/upcoming", {
           params: {
             language: "en-US",
           },
         });
         setMovies(res.data.results);
         getRandom(res.data.results);
+        setIsLoading(false);
       } catch (err) {
-        console.log(err);
+        setIsLoading(false);
+        setMovies([]);
         return;
       }
     };
@@ -79,13 +83,13 @@ const Home = () => {
     <Layout genres={genres} home>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Vicinemax | Movie Library</title>
+        <title>Upcoming | Vicinemax</title>
         <meta
           name="description"
           content="Vicinemax is a movie library that provide detail info about movies"
         />
       </Helmet>
-      {movies.length > 0 ? (
+      {!isLoading ? (
         <>
           <div className="featured-container">
             <h2>For You</h2>
@@ -117,7 +121,7 @@ const Home = () => {
             </Carousel>
           </div>
           <div className="popular-container">
-            <h2>Popular</h2>
+            <h2>Now Playing</h2>
             <div className="movies-wrapper">
               {movies.map((movie) => {
                 return (
@@ -163,4 +167,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Upcoming;
